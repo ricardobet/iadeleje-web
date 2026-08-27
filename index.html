@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iadeleje — Asistentes de WhatsApp con IA</title>
+<meta name="description" content="Iadeleje desarrolla asistentes de WhatsApp con inteligencia artificial para negocios que venden por chat. Pereira, Colombia.">
+<link rel="canonical" href="https://iadeleje.co/">
+<meta property="og:title" content="Iadeleje — Asistentes de WhatsApp con IA">
+<meta property="og:description" content="Atención automática por WhatsApp para negocios que venden por chat.">
+<meta property="og:url" content="https://iadeleje.co/">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground:   #f6f7f5;
+    --surface:  #ffffff;
+    --line:     #dfe4de;
+    --ink:      #14181a;
+    --ink-mid:  #4d585c;
+    --ink-soft: #78858a;
+    --accent:   #0f6d55;
+    --accent-2: #0b5442;
+    --accent-w: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground:   #0e1214;
+      --surface:  #161c1f;
+      --line:     #263034;
+      --ink:      #e9efec;
+      --ink-mid:  #a7b4b7;
+      --ink-soft: #7d8b8f;
+      --accent:   #4fc0a1;
+      --accent-2: #6ad3b5;
+      --accent-w: #06110d;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 60rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* barra superior */
+  header.top {
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    position: sticky; top: 0; z-index: 10;
+  }
+  header.top .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; padding-top: .9rem; padding-bottom: .9rem;
+  }
+  .marca {
+    font-family: Sora, system-ui, sans-serif; font-weight: 700;
+    font-size: 1.15rem; letter-spacing: -.02em; color: var(--ink);
+    text-decoration: none;
+  }
+  .marca span { color: var(--accent); }
+  header.top nav { display: flex; gap: 1.25rem; font-size: .92rem; }
+  header.top nav a { color: var(--ink-mid); text-decoration: none; }
+  header.top nav a:hover { color: var(--accent); }
+  @media (max-width: 33rem) { header.top nav { display: none; } }
+
+  /* portada */
+  .hero { padding: 4rem 0 3.25rem; }
+  .hero h1 {
+    font-family: Sora, system-ui, sans-serif;
+    font-size: clamp(2rem, 6vw, 3.1rem); font-weight: 700;
+    line-height: 1.1; letter-spacing: -.03em; text-wrap: balance;
+    margin: 0 0 1.1rem; max-width: 18ch;
+  }
+  .hero p.lead {
+    font-size: clamp(1.05rem, 2.4vw, 1.2rem); color: var(--ink-mid);
+    max-width: 46ch; margin: 0 0 2rem;
+  }
+  .acciones { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .btn {
+    display: inline-block; padding: .8rem 1.4rem; border-radius: 6px;
+    font-weight: 600; font-size: .97rem; text-decoration: none;
+    border: 1px solid transparent; transition: background .15s ease, border-color .15s ease;
+  }
+  .btn-p { background: var(--accent); color: var(--accent-w); }
+  .btn-p:hover { background: var(--accent-2); }
+  .btn-s { border-color: var(--line); color: var(--ink); background: var(--surface); }
+  .btn-s:hover { border-color: var(--accent); color: var(--accent); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* secciones */
+  section.bloque { padding: 3rem 0; border-top: 1px solid var(--line); }
+  h2 {
+    font-family: Sora, system-ui, sans-serif; font-weight: 600;
+    font-size: 1.5rem; letter-spacing: -.02em; margin: 0 0 .5rem;
+  }
+  .sub { color: var(--ink-mid); margin: 0 0 2rem; max-width: 52ch; }
+
+  .rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+  .tarjeta {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 8px; padding: 1.35rem;
+  }
+  .tarjeta h3 {
+    font-family: Sora, system-ui, sans-serif; font-size: 1.02rem;
+    font-weight: 600; margin: 0 0 .45rem;
+  }
+  .tarjeta p { margin: 0; color: var(--ink-mid); font-size: .95rem; }
+
+  /* pasos numerados: el orden importa, es una secuencia real */
+  ol.pasos { list-style: none; counter-reset: p; margin: 0; padding: 0; display: grid; gap: 1.5rem; }
+  ol.pasos li { counter-increment: p; display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; }
+  ol.pasos li::before {
+    content: counter(p);
+    font-family: Sora, system-ui, sans-serif; font-weight: 600; font-size: .85rem;
+    width: 2rem; height: 2rem; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--accent); color: var(--accent-w);
+  }
+  ol.pasos h3 { font-family: Sora, sans-serif; font-size: 1.02rem; font-weight: 600; margin: .2rem 0 .3rem; }
+  ol.pasos p { margin: 0; color: var(--ink-mid); font-size: .95rem; }
+
+  /* contacto */
+  dl.datos { display: grid; grid-template-columns: auto 1fr; gap: .55rem 1.25rem; margin: 0; font-size: .96rem; }
+  dl.datos dt { color: var(--ink-soft); }
+  dl.datos dd { margin: 0; color: var(--ink); }
+  dl.datos a { color: var(--accent); text-decoration: none; }
+  dl.datos a:hover { text-decoration: underline; }
+  @media (max-width: 30rem) {
+    dl.datos { grid-template-columns: 1fr; gap: .1rem; }
+    dl.datos dd { margin-bottom: .7rem; }
+  }
+
+  footer.pie {
+    border-top: 1px solid var(--line); background: var(--surface);
+    padding: 2rem 0; font-size: .87rem; color: var(--ink-soft);
+  }
+  footer.pie .wrap { display: flex; flex-direction: column; gap: .9rem; }
+  footer.pie .legal { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; }
+  footer.pie a { color: var(--ink-mid); text-decoration: none; }
+  footer.pie a:hover { color: var(--accent); }
+  footer.pie .fiscal { line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="marca" href="/">ia<span>deleje</span></a>
+    <nav>
+      <a href="#servicio">Qué hace</a>
+      <a href="#como">Cómo funciona</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Tu negocio atiende por WhatsApp aunque tú estés durmiendo.</h1>
+      <p class="lead">
+        Desarrollamos asistentes de WhatsApp con inteligencia artificial para negocios
+        que venden por chat: responden en segundos, entienden notas de voz, envían
+        catálogos y avisan a una persona cuando hace falta.
+      </p>
+      <div class="acciones">
+        <a class="btn btn-p" href="https://wa.me/573182997874">Escríbenos por WhatsApp</a>
+        <a class="btn btn-s" href="#contacto">Ver datos de contacto</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="bloque" id="servicio">
+      <h2>Qué hace el asistente</h2>
+      <p class="sub">
+        Funciona sobre la API oficial de WhatsApp Business de Meta, con el número
+        que tus clientes ya conocen.
+      </p>
+      <div class="rejilla">
+        <div class="tarjeta">
+          <h3>Responde al instante</h3>
+          <p>Atiende consultas de precios, horarios y disponibilidad a cualquier hora, con el tono y la información de tu negocio.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>Entiende notas de voz</h3>
+          <p>Transcribe los audios que manda el cliente y responde a lo que realmente preguntó, sin pedirle que escriba.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>Envía tus documentos</h3>
+          <p>Manda catálogos, listas de precios o fichas en PDF e imagen en el momento en que el cliente los pide.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>Te pasa la conversación</h3>
+          <p>Cuando el cliente está listo para comprar o pregunta algo delicado, avisa y cede el chat a una persona.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>Recupera conversaciones frías</h3>
+          <p>Si alguien deja de responder a mitad de una consulta, le escribe una vez para retomarla.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>Panel de control</h3>
+          <p>Todas las conversaciones, el histórico y las estadísticas en un panel web, con exportación de contactos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloque" id="como">
+      <h2>Cómo funciona</h2>
+      <p class="sub">Del primer contacto a tener el asistente atendiendo.</p>
+      <ol class="pasos">
+        <li>
+          <div>
+            <h3>Hablamos de tu negocio</h3>
+            <p>Qué vendes, qué te preguntan todo el día y qué respuestas das hoy. De ahí sale lo que el asistente sabrá contestar.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Conectamos tu número</h3>
+            <p>Usamos el número que tus clientes ya tienen guardado. Tú sigues escribiendo desde tu teléfono cuando quieras.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Lo ajustamos contigo</h3>
+            <p>Revisamos conversaciones reales de los primeros días y afinamos las respuestas hasta que suenen a tu negocio.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Queda funcionando</h3>
+            <p>Atiende solo, y tú entras al panel cuando quieras para ver qué está pasando o responder tú mismo.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="bloque" id="contacto">
+      <h2>Contacto</h2>
+      <p class="sub">Cuéntanos qué vendes y te decimos si esto encaja con tu negocio.</p>
+      <dl class="datos">
+        <dt>Responsable</dt>
+        <dd>Ricardo Betancourth Bolívar</dd>
+
+        <dt>WhatsApp</dt>
+        <dd><a href="https://wa.me/573182997874">+57 318 299 7874</a></dd>
+
+        <dt>Correo</dt>
+        <dd><a href="mailto:hola@iadeleje.co">hola@iadeleje.co</a></dd>
+
+        <dt>Dirección</dt>
+        <dd>MZ 4 CA 17 SEC E BRR PARQUE INDUSTRIAL<br>Pereira, Risaralda, Colombia</dd>
+
+        <dt>NIT</dt>
+        <dd>1088302179-7</dd>
+      </dl>
+    </section>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <div class="fiscal">
+      <strong>Iadeleje</strong> — Ricardo Betancourth Bolívar · NIT 1088302179-7<br>
+      MZ 4 CA 17 SEC E BRR PARQUE INDUSTRIAL, Pereira, Risaralda, Colombia
+    </div>
+    <div class="legal">
+      <a href="/privacidad.html">Política de privacidad</a>
+      <a href="/terminos.html">Condiciones del servicio</a>
+      <a href="/eliminacion-de-datos.html">Eliminación de datos</a>
+    </div>
+    <div>© 2026 Iadeleje. Desarrollo de software · CIIU 6201.</div>
+  </div>
+</footer>
+
+</body>
+</html>
