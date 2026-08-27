@@ -141,6 +141,27 @@
   .sector{border:1px solid var(--line);background:rgba(255,255,255,.025);border-radius:99px;
     padding:.5rem 1rem;font-size:.9rem;color:var(--ink-mid)}
 
+  /* ── clientes ── */
+  .cliente{display:grid;grid-template-columns:auto 1fr;gap:1.75rem;align-items:center;
+    background:linear-gradient(160deg,var(--panel),var(--deep));border:1px solid var(--line-soft);
+    border-radius:var(--r);padding:1.75rem}
+  @media(max-width:40rem){.cliente{grid-template-columns:1fr;gap:1.25rem;text-align:left}}
+  .cliente .placa{width:9.5rem;height:9.5rem;border-radius:16px;background:#fff;flex:none;
+    display:grid;place-items:center;padding:1.1rem;
+    box-shadow:0 0 0 1px rgba(58,216,245,.2),0 18px 40px -22px rgba(0,0,0,.9)}
+  @media(max-width:40rem){.cliente .placa{width:7.5rem;height:7.5rem;padding:.9rem}}
+  .cliente .placa img{max-width:100%;max-height:100%;object-fit:contain}
+  .cliente .quien{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--cyan);margin:0 0 .45rem}
+  .cliente h3{font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
+  .cliente p{margin:0 0 .9rem;color:var(--ink-mid);font-size:.96rem}
+  .cliente ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.45rem}
+  .cliente li{font-size:.83rem;color:var(--ink-mid);border:1px solid var(--line);
+    background:rgba(58,216,245,.05);border-radius:99px;padding:.3rem .8rem}
+  .siguiente{margin:1.5rem 0 0;color:var(--ink-soft);font-size:.92rem}
+  .siguiente a{color:var(--cyan);text-decoration:none}
+  .siguiente a:hover{text-decoration:underline}
+
   /* ── contacto ── */
   .cta{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);
     background:linear-gradient(150deg,var(--panel-2),var(--deep));padding:clamp(1.75rem,5vw,3rem)}
@@ -175,6 +196,7 @@
       <a href="#servicio">Qué hace</a>
       <a href="#como">Cómo funciona</a>
       <a href="#sectores">Para quién</a>
+      <a href="#clientes">Clientes</a>
       <a href="#contacto">Contacto</a>
     </nav>
     <a class="btn btn-p" href="https://wa.me/573182997874">Hablar por WhatsApp</a>
@@ -301,6 +323,38 @@
         <span class="sector">Inmobiliarias</span>
         <span class="sector">Talleres y reparaciones</span>
       </div>
+    </section>
+
+    <section class="bloque" id="clientes">
+      <p class="eyebrow">Clientes</p>
+      <h2>Ya están atendiendo con IA</h2>
+      <p class="sub">Negocios reales, con su número de siempre y sus clientes escribiendo a cualquier hora.</p>
+
+      <div class="cliente">
+        <div class="placa">
+          <img src="eduwork.png" alt="Eduwork" loading="lazy">
+        </div>
+        <div>
+          <p class="quien">Institución de formación · Colombia</p>
+          <h3>Eduwork</h3>
+          <p>
+            Su asistente atiende a los aspirantes por WhatsApp: resuelve dudas sobre
+            programas, requisitos y costos, envía el pénsum en PDF cuando se lo piden y
+            entiende las notas de voz de quien prefiere hablar antes que escribir. Cuando
+            alguien está listo para matricularse, pasa la conversación a un asesor.
+          </p>
+          <ul>
+            <li>Respuestas 24/7</li>
+            <li>Pénsums en PDF</li>
+            <li>Notas de voz</li>
+            <li>Traspaso a asesor</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="siguiente">
+        ¿Quieres ser el siguiente? <a href="https://wa.me/573182997874">Escríbenos y lo hablamos</a>.
+      </p>
     </section>
 
     <section class="bloque" id="contacto">
